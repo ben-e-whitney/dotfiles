@@ -20,11 +20,6 @@ set foldenable
 set foldmethod=syntax
 set suffixes+=.c
 
-"Disable default indent. Want to use `vim-python-pep8-indent` instead.
-echom "would be turning filetype indent off in ftplugin/python.vim" 
-"filetype indent off
-"We'll turn this back on in `after/ftplugin/python.vim`.
-
 "Greek letters.
 digraph al 945
 digraph be 946
