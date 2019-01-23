@@ -1,0 +1,48 @@
+" no vi compatibility
+set nocompatible
+syntax on
+set nojoinspaces
+
+" Other good ones: IDLE, hybrid, habiLight, darkrobot, northland,
+" solarized, peachpuff, desert, zellner, distinguished
+colorscheme hybrid
+"set background=dark
+
+"TODO: activate this only in .tex files.
+"hi clear SpellBad
+"hi SpellBad ctermfg=red
+
+nmap ; :
+vmap ; :
+
+"Assume *.tex files are LaTeX.
+let g:tex_flavor = "latex"
+
+let g:vimwiki_list = [{'path':'~/Documents/Personal/Wiki', 'path_html':'~/Documents/Personal/WikiHTML'}]
+
+set nohlsearch
+set display=lastline
+set number
+set numberwidth=1
+" Working off of <http://peox.net/articles/vimconfig.html>.
+" NERDCommenter complains if filetype plugins are off.
+filetype plugin on
+" Exceptions (in particular TeX) are handled in filetype.vim.
+filetype indent on
+
+set runtimepath+=$HOME/.vim/colors
+
+set autochdir
+set autoread " watch for file changes by other applications
+
+"Open `gf` files in a new tab instead of the current window.
+nnoremap gf <C-W>gf
+vnoremap gf <C-W>gf
+
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/*.{py,pyx} setlocal path+=~brown/HS/packages/multilevel,~brown/HS/packages/helpers
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/*.{py,pyx} setlocal tags+=~brown/HS/tags
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/papers/tensored-nd-sobolev*.tex setlocal path+=~brown/HS/papers/tensored-nd-sobolev
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/papers/*.tex setlocal path+=~brown/HS/
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/papers/tensored-nd-sobolev*.tex setlocal path+=~brown/HS/papers/tensored-nd-sobolev
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/papers/unstructured*.tex setlocal path+=~brown/HS/papers/unstructured
+autocmd BufNewFile,BufRead /home/brown/Documents/Research/thesis/*.tex setlocal path+=~brown/thesis,~brown/thesis/texmf/tex/latex
