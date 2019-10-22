@@ -7,6 +7,3 @@ set guifont=DejaVu\ Sans\ Mono\ 16
 set mouse=c
 
 set belloff=all
-
-map <C-Tab> gt
-map <C-S-Tab> gT

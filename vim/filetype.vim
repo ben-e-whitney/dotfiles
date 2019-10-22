@@ -8,4 +8,8 @@ augroup filetypedetect
   au! BufRead,BufNewFile *.jinja setfiletype jinja
   "au! BufRead,BufNewFile *.pyx setfiletype cython
   au! BufRead,BufNewFile *.pyx setfiletype python
+  "Open the corresponding implementation file.
+  autocmd BufNewFile,BufRead *.hpp nnoremap <buffer> <C-I> :find %:r.cpp<CR>
+  "Using the same key combination here because '<C-H>' moves to the left.
+  autocmd BufNewFile,BufRead *.cpp nnoremap <buffer> <C-I> :find %:r.hpp<CR>
 augroup END

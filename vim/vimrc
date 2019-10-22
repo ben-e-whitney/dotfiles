@@ -15,6 +15,10 @@ colorscheme hybrid
 nmap ; :
 vmap ; :
 
+"TODO: also quit when closing the last buffer in a window.
+nnoremap <C-D> :bdelete<CR>
+nnoremap <C-S> :write<CR>
+
 "Assume *.tex files are LaTeX.
 let g:tex_flavor = "latex"
 
@@ -35,9 +39,19 @@ set runtimepath+=$HOME/.vim/colors
 set autochdir
 set autoread " watch for file changes by other applications
 
-"Open `gf` files in a new tab instead of the current window.
-nnoremap gf <C-W>gf
-vnoremap gf <C-W>gf
+"Open `gf` files in a new tab instead of in a new buffer in the current window.
+"nnoremap gf <C-W>gf
+"vnoremap gf <C-W>gf
+
+"When the statusline is on top, you can't see the tabline.
+"let g:airline_statusline_ontop = 1
+let g:airline#extensions#tabline#enabled = 1
+
+"TODO: Possibly use instead <C-H> (remap) and <C-L>.
+map <C-Tab> :bnext<CR>
+map <C-S-Tab> :bprevious<CR>
+"Hide (instead of unloading) buffers when changing from them.
+set hidden
 
 autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/*.{py,pyx} setlocal path+=~brown/HS/packages/multilevel,~brown/HS/packages/helpers
 autocmd BufNewFile,BufRead /home/brown/Documents/Research/Hierarchical_Storage/*.{py,pyx} setlocal tags+=~brown/HS/tags
