@@ -1,3 +1,6 @@
 [submodule "vim/pack/outside/start/vim-airline"]
 	path = vim/pack/outside/start/vim-airline
 	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/pack/outside/start/supertab"]
+	path = vim/pack/outside/start/supertab
+	url = https://github.com/ervandew/supertab.git
