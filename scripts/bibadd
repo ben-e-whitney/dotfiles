@@ -1,0 +1,38 @@
+#!/bin/bash
+
+BIBDB="$HOME/texmf/bibtex/bib/sources.bib"
+PAPERDIR="$HOME/Documents/papers"
+
+if [ $# -ne 2 ]
+then
+	echo 'Usage: bibadd [.bib file] [.pdf file]'
+	exit 1
+fi
+
+BIBFILE=$1
+PDFFILE=$2
+
+sed --in-place --expression 's/\r//' "$BIBFILE"
+
+KEY=$(head --lines 1 "$BIBFILE" | perl -ne '/^@[a-zA-Z]+\{([a-z]+_[a-z]+_[0-9]{4}),$/ && print $1;')
+
+if [ ! $KEY ]
+then
+	echo "No BibTeX key found. First line of '$BIBFILE' follows."
+	head --lines 1 "$BIBFILE"
+	exit 1
+fi
+
+if [ -d "$PAPERDIR/$KEY" ]
+then
+	echo "'$PAPERDIR/$KEY' already exists. Exiting."
+	exit 1
+fi
+
+mkdir "$PAPERDIR/$KEY"
+mv "$PDFFILE" "$PAPERDIR/$KEY/$KEY.pdf"
+
+cat "$BIBFILE" >> "$BIBDB"
+rm "$BIBFILE"
+
+exit 0
