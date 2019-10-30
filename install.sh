@@ -17,3 +17,4 @@ echo "XDG_RUNTIME_DIR DEFAULT=\"/run/user/$(id --user)\"" > "${PAM_ENVIRONMENT}"
 cat "${PWD}/PAM/pam_environment" >> "${PAM_ENVIRONMENT}"
 
 ${LN} "${PWD}/scripts/bibadd" "$HOME/.local/bin/bibadd"
+${LN} "${PWD}/scripts/toread" "$HOME/.local/bin/toread"
