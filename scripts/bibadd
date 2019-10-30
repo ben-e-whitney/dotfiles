@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-BIBDB="$HOME/texmf/bibtex/bib/sources.bib"
-PAPERDIR="$HOME/Documents/papers"
+BIBDB="${HOME}/texmf/bibtex/bib/sources.bib"
+PAPERDIR="${HOME}/papers"
+UUIDDB="${XDG_DATA_HOME:-${HOME}/.local/share}/toread/uuids.csv"
 
 if [ $# -ne 2 ]
 then
@@ -9,30 +10,40 @@ then
 	exit 1
 fi
 
-BIBFILE=$1
-PDFFILE=$2
+BIBFILE="$1"
+PDFFILE="$2"
 
-sed --in-place --expression 's/\r//' "$BIBFILE"
+sed --in-place --expression 's/\r//' "${BIBFILE}"
 
-KEY=$(head --lines 1 "$BIBFILE" | perl -ne '/^@[a-zA-Z]+\{([a-z]+_[a-z]+_[0-9]{4}),$/ && print $1;')
+KEY="$(head --lines 1 "${BIBFILE}" | perl -ne '/^@[a-zA-Z]+\{([a-z]+_[a-z]+_[0-9]{4}),$/ && print $1;')"
 
-if [ ! $KEY ]
+if [ ! "${KEY}" ]
 then
-	echo "No BibTeX key found. First line of '$BIBFILE' follows."
-	head --lines 1 "$BIBFILE"
+	echo "No BibTeX key found. First line of '${BIBFILE}' follows."
+	head --lines 1 "${BIBFILE}"
 	exit 1
 fi
 
-if [ -d "$PAPERDIR/$KEY" ]
+if [ -d "${PAPERDIR}/${KEY}" ]
 then
-	echo "'$PAPERDIR/$KEY' already exists. Exiting."
+	echo "'${PAPERDIR}/${KEY}' already exists. Exiting."
 	exit 1
 fi
 
-mkdir "$PAPERDIR/$KEY"
-mv "$PDFFILE" "$PAPERDIR/$KEY/$KEY.pdf"
+mkdir --parents "${PAPERDIR}/${KEY}"
+mv "${PDFFILE}" "${PAPERDIR}/${KEY}/${KEY}.pdf"
 
-cat "$BIBFILE" >> "$BIBDB"
-rm "$BIBFILE"
+#Apparently this is OK. See <https://unix.stackexchange.com/a/118438>.
+mkdir --parents "$(dirname "${BIBDB}")"
+if [ -f "${BIBDB}" ]
+then
+	echo '' >> "${BIBDB}"
+fi
+cat "${BIBFILE}" >> "${BIBDB}"
+rm "${BIBFILE}"
+
+task add "Read \`${KEY}\`." +toread
+mkdir --parents "$(dirname "${UUIDDB}")"
+echo "${KEY},$(task +LATEST uuids)" >> "${UUIDDB}"
 
 exit 0
