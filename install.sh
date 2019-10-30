@@ -7,10 +7,12 @@ ${LN} "${PWD}/fish" "${HOME}/.config/fish"
 ${LN} "${PWD}/i3" "${HOME}/.config/i3"
 ${LN} "${PWD}/terminator" "${HOME}/.config/terminator"
 ${LN} "${PWD}/vim" "${HOME}/.vim"
-${LN} "${PWD}/terminator/taskrc/ "${HOME}/.taskrc"
+${LN} "${PWD}/terminator/taskrc/" "${HOME}/.taskrc"
 
 PAM_ENVIRONMENT="${HOME}/.pam_environment"
 
+${LN} "${PWD}/X/Xmodmap" "${HOME}/.Xmodmap"
+${LN} "${PWD}/X/xsessionrc" "${HOME}/.xsessionrc"
 #It looks like `XDG_RUNTIME_DIR` isn't set whenever this file gets read.
 #Providing a default.
 echo "XDG_RUNTIME_DIR DEFAULT=\"/run/user/$(id --user)\"" > "${PAM_ENVIRONMENT}"
