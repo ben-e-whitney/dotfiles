@@ -11,9 +11,8 @@ fi
 if [ $# -ne 1 ]
 then
 	echo 'Usage: read [BibTeX key]'
-	echo 'Possible keys:'
-	#TODO: try printing these with spaces instead of newlines.
-	awk -F ',' '{print $1}' < "${UUIDDB}"
+	echo -n 'Possible keys: '
+	awk -F ',' '{print $1}' < "${UUIDDB}" | tr '\n' ' ' | sed --expression 's/ *$/\n/'
 	exit 1
 fi
 
@@ -26,13 +25,17 @@ then
 	exit 1
 fi
 
-PAPERPDF="${PAPERDIR}/${KEY}/${KEY}.pdf"
-if [ ! -f "${PAPERPDF}" ]
+if [ ! "$(task +ACTIVE "${UUID}" uuids)" ]
 then
-	echo "Paper not found (expected at '${PAPERPDF}'). Exiting."
-	exit 1
+	PAPERPDF="${PAPERDIR}/${KEY}/${KEY}.pdf"
+	if [ ! -f "${PAPERPDF}" ]
+	then
+		echo "Paper not found (expected at '${PAPERPDF}'). Exiting."
+		exit 1
+	fi
+	xdg-open "${PAPERPDF}" &
+	task "${UUID}" start
+else
+	task "${UUID}" done
+	sed --in-place --expression "/^${KEY},${UUID}$/d" "${UUIDDB}"
 fi
-
-#TODO: check whether you've started the task or not. If not, open PDF and mark as started. If started, mark as done.
-xdg-open "${PAPERPDF}" &
-task "${UUID}" start
