@@ -15,8 +15,22 @@ colorscheme hybrid
 nmap ; :
 vmap ; :
 
-"TODO: also quit when closing the last buffer in a window.
-nnoremap <C-D> :bdelete<CR>
+"See <https://www.reddit.com/r/vim/comments/3hwall/how_to_close_vim_when_last_buffer_is_deleted/>.
+function CloseBuffer()
+	let cnt = 0
+	for i in range(0, bufnr("$"))
+		if buflisted(i)
+			let cnt += 1
+		endif
+	endfor
+	if cnt > 1
+		bdelete
+	else
+		quit
+	endif
+endfunction
+
+nnoremap <C-D> :call CloseBuffer()<CR>
 nnoremap <C-S> :write<CR>
 
 "Assume *.tex files are LaTeX.
@@ -38,10 +52,6 @@ set runtimepath+=$HOME/.vim/colors
 
 set autochdir
 set autoread " watch for file changes by other applications
-
-"Open `gf` files in a new tab instead of in a new buffer in the current window.
-"nnoremap gf <C-W>gf
-"vnoremap gf <C-W>gf
 
 "When the statusline is on top, you can't see the tabline.
 "let g:airline_statusline_ontop = 1
