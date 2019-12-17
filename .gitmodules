@@ -7,3 +7,6 @@
 [submodule "vim/pack/outside/start/IDLE"]
 	path = vim/pack/outside/start/IDLE
 	url = https://github.com/vim-scripts/IDLE.git
+[submodule "vim/pack/outside/start/vim-hybrid"]
+	path = vim/pack/outside/start/vim-hybrid
+	url = https://github.com/w0ng/vim-hybrid.git
