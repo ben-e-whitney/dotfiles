@@ -4,3 +4,6 @@
 [submodule "vim/pack/outside/start/supertab"]
 	path = vim/pack/outside/start/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "vim/pack/outside/start/IDLE"]
+	path = vim/pack/outside/start/IDLE
+	url = https://github.com/vim-scripts/IDLE.git
