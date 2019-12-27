@@ -13,3 +13,6 @@
 [submodule "vim/pack/outside/start/habiLight"]
 	path = vim/pack/outside/start/habiLight
 	url = https://github.com/vim-scripts/habiLight.git
+[submodule "vim/pack/outside/start/vim-colors-solarized"]
+	path = vim/pack/outside/start/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
