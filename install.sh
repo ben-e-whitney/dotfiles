@@ -7,7 +7,7 @@ ${LN} "${PWD}/fish" "${HOME}/.config/fish"
 ${LN} "${PWD}/i3" "${HOME}/.config/i3"
 ${LN} "${PWD}/terminator" "${HOME}/.config/terminator"
 ${LN} "${PWD}/vim" "${HOME}/.vim"
-${LN} "${PWD}/terminator/taskrc/" "${HOME}/.taskrc"
+${LN} "${PWD}/taskwarrior/taskrc/" "${HOME}/.taskrc"
 
 PAM_ENVIRONMENT="${HOME}/.pam_environment"
 
