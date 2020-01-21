@@ -16,3 +16,6 @@
 [submodule "vim/pack/outside/start/vim-colors-solarized"]
 	path = vim/pack/outside/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "vim/pack/outside/start/vim-python-pep8-indent"]
+	path = vim/pack/outside/start/vim-python-pep8-indent
+	url = https://github.com/Vimjas/vim-python-pep8-indent.git
