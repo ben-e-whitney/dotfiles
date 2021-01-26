@@ -15,7 +15,7 @@ PDFFILE="$2"
 
 sed --in-place --expression 's/\r//' "${BIBFILE}"
 
-KEY="$(head --lines 1 "${BIBFILE}" | perl -ne '/^@[a-zA-Z]+\{([a-z-]+_[a-z-]+_[0-9]{4}),$/ && print $1;')"
+KEY="$(head --lines 1 "${BIBFILE}" | perl -ne '/^@[a-zA-Z]+\{([a-z-]+_[a-z-]+_[0-9]{4}[a-z]?),$/ && print $1;')"
 
 if [ ! "${KEY}" ]
 then
