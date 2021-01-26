@@ -1,3 +1,3 @@
 function open
-	xdg-open $argv &
+	xdg-open $argv &; disown
 end
