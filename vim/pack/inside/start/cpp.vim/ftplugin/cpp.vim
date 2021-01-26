@@ -30,4 +30,5 @@ set cinoptions+=(1s
 "opening parentheses.
 set cinoptions+=m1
 
-set path+=~/include,include;~,src;~
+set path+=~/.local/include,include;~,src;~
+set tags=tags;~
